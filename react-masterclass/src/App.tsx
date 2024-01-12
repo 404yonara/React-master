@@ -49,17 +49,18 @@ const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
-
   // My custom
   * {
     box-sizing: border-box;
   }
   body {
+    // PT Sans Narrow를 사용하되, 로드되지 않는다면 sans-serif를 사용한다.
     font-family: 'PT Sans Narrow', sans-serif;
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.textColor};
   }
   a {
+    // 모든 a들이 underline을 갖지 않게 한다.
     text-decoration: none;
     color:inherit;
   }

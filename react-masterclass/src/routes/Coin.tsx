@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams, Routes, Route, Outlet } from "react-router";
+import { useLocation, useParams, Routes, Route } from "react-router";
 import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
