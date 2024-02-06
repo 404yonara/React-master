@@ -2,6 +2,9 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
+import { Helmet } from "react-helmet";
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 export const Container = styled.div`
   padding: 0px 20px;
@@ -10,18 +13,21 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
-  height: 10vh;
+  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CoinsList = styled.ul``;
+const CoinsList = styled.ul`
+  color: ${(props) => props.theme.textColor};
+`;
 
 const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
   border-radius: 15px;
+  border: 1px solid white;
   margin-bottom: 10px;
   a {
     display: flex;
@@ -63,11 +69,17 @@ interface ICoin {
 }
 
 function Coins() {
+  const setIsDark = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setIsDark((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
+      <Helmet>
+        <title>Coins</title>
+      </Helmet>
       <Header>
         <Title>Coin</Title>
+        <button onClick={toggleDarkAtom}>Toggle Mode</button>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
