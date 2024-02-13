@@ -10,13 +10,11 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    <React.StrictMode>
-      <RecoilRoot>
-        <ThemeProvider theme={darkTheme}>
-          <App />
-        </ThemeProvider>
-      </RecoilRoot>
-    </React.StrictMode>
+    <RecoilRoot>
+      <ThemeProvider theme={darkTheme}>
+        <App />
+      </ThemeProvider>
+    </RecoilRoot>
   );
 } else {
   console.error("Element with id 'root' not found.");
