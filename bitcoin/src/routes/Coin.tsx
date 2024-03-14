@@ -6,7 +6,7 @@ import { /*Routes,*/ Outlet, Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
-const Container = styled.div`
+export const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
@@ -29,14 +29,14 @@ const Loader = styled.span`
   display: block;
 `;
 
-const Overview = styled.div`
+export const Overview = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 20px;
   border-radius: 10px;
 `;
-const OverviewItem = styled.div`
+export const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,5 +1,7 @@
 import { useQuery } from "react-query";
 import { useLocation, useOutletContext } from "react-router-dom";
+import styled from "styled-components";
+import { Container, Overview, OverviewItem } from "./Coin";
 
 interface PriceDataOfUSD {
   ath_date: string;
@@ -31,7 +33,60 @@ function Price() {
   const priceData = state as PriceDataOfUSD;
   console.log(priceData);
 
-  return <h1>Price</h1>;
+  return (
+    <Container>
+      <Overview>
+        <OverviewItem>
+          <span>price change</span>
+          <span>15 minutes ago</span>
+        </OverviewItem>
+        <OverviewItem>
+          <span>percent</span>
+          <span>{priceData.percent_change_15m}</span>
+        </OverviewItem>
+      </Overview>
+      <Overview>
+        <OverviewItem>
+          <span>price change</span>
+          <span>1 hour ago</span>
+        </OverviewItem>
+        <OverviewItem>
+          <span>percent</span>
+          <span>{priceData.percent_change_1h}</span>
+        </OverviewItem>
+      </Overview>
+      <Overview>
+        <OverviewItem>
+          <span>price change</span>
+          <span>24 hour ago</span>
+        </OverviewItem>
+        <OverviewItem>
+          <span>percent</span>
+          <span>{priceData.percent_change_24h}</span>
+        </OverviewItem>
+      </Overview>
+      <Overview>
+        <OverviewItem>
+          <span>price change</span>
+          <span>7 days ago</span>
+        </OverviewItem>
+        <OverviewItem>
+          <span>percent</span>
+          <span>{priceData.percent_change_7d}</span>
+        </OverviewItem>
+      </Overview>
+      <Overview>
+        <OverviewItem>
+          <span>price change</span>
+          <span>30 days ago</span>
+        </OverviewItem>
+        <OverviewItem>
+          <span>percent</span>
+          <span>{priceData.percent_change_30d}</span>
+        </OverviewItem>
+      </Overview>
+    </Container>
+  );
 }
 
 export default Price;
