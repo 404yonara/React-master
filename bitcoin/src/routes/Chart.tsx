@@ -4,33 +4,22 @@ import { fetchCoinHistroy } from "../api";
 import ApexChart from "react-apexcharts";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atoms";
+import { useEffect } from "react";
 
 interface ICoinID {
   coinId: string;
 }
 
 interface IHistroical {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  volume: number;
+  time_open: number;
+  time_close: number;
+  open: string;
+  high: string;
+  low: string;
+  close: string;
+  volume: string;
   market_cap: number;
 }
-
-interface IdataForSeries {
-  x: Date;
-  y: number[];
-}
-
-type IseriesForChart = {
-  data: {
-    x: Date;
-    y: number[];
-  }[];
-}[];
 
 function Chart() {
   const { coinId } = useOutletContext<ICoinID>();
@@ -39,17 +28,18 @@ function Chart() {
   const { isLoading, data } = useQuery<IHistroical[]>(["ohlcv", coinId], () =>
     fetchCoinHistroy(coinId)
   );
-  const formatDate = (time: string) => {
+  const formatDate = (time: number) => {
     const date = new Date(+time * 1000);
 
     const day = date.getDate();
     const month = date.toLocaleString("en-US", { month: "short" });
-    const year = date.getFullYear() % 100;
+    // const year = date.getFullYear() % 100;
     // const formattedDate = `${day} ${month} ${year}`;
     const formattedDate = `${day} ${month}`;
 
     return formattedDate;
   };
+  useEffect(() => console.log(data), [data]);
 
   return (
     <h1>
@@ -57,11 +47,14 @@ function Chart() {
         "Loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "close price",
-              data: data?.map((item) => item.close) ?? [],
+              data:
+                data?.map((item) => ({
+                  x: formatDate(item.time_open),
+                  y: [item.open, item.high, item.low, item.close],
+                })) ?? [],
             },
           ]}
           options={{
@@ -75,14 +68,9 @@ function Chart() {
               background: "transparent",
             },
             xaxis: {
-              categories: data?.map((item) => formatDate(item.time_close)),
               labels: { show: false },
               axisBorder: { show: false },
               axisTicks: { show: false },
-            },
-            fill: {
-              type: "gradient",
-              gradient: { gradientToColors: ["blue"], stops: [0, 100] },
             },
             colors: ["red"],
             tooltip: {
@@ -100,28 +88,6 @@ function Chart() {
             },
           }}
         />
-        // <ApexChart
-        //   type="candlestick"
-        //   series={series}
-        //   options={{
-        //     chart: {
-        //       type: "candlestick",
-        //       height: 350,
-        //     },
-        //     title: {
-        //       text: "CandleStick Chart",
-        //       align: "left",
-        //     },
-        //     xaxis: {
-        //       type: "datetime",
-        //     },
-        //     yaxis: {
-        //       tooltip: {
-        //         enabled: true,
-        //       },
-        //     },
-        //   }}
-        // />
       )}
     </h1>
   );

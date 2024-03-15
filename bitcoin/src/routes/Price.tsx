@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { useLocation, useOutletContext } from "react-router-dom";
 import styled from "styled-components";
-import { Container, Overview, OverviewItem } from "./Coin";
 
 interface PriceDataOfUSD {
   ath_date: string;
@@ -22,6 +21,33 @@ interface PriceDataOfUSD {
   volume_24h: number;
   volume_24h_change_24h: number;
 }
+
+const Container = styled.div`
+  padding: 0px 20px;
+  max-width: 480px;
+  margin: 0 auto;
+`;
+
+const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
+
+const OverviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
 
 interface ICoinID {
   coinId: string;

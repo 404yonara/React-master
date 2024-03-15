@@ -6,7 +6,7 @@ import { /*Routes,*/ Outlet, Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 
-export const Container = styled.div`
+const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
@@ -29,14 +29,15 @@ const Loader = styled.span`
   display: block;
 `;
 
-export const Overview = styled.div`
+const Overview = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px 20px;
   border-radius: 10px;
 `;
-export const OverviewItem = styled.div`
+
+const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +48,7 @@ export const OverviewItem = styled.div`
     margin-bottom: 5px;
   }
 `;
+
 const Description = styled.p`
   margin: 20px 0px;
 `;
